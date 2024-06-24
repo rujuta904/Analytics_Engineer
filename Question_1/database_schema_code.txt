@@ -1,0 +1,242 @@
+// Code for generating the E-R Diagram
+// All foreign keys are connected using the ref command
+
+// Storing the guest information, with the GuestID being a uuid value
+Table Guests {
+  GuestID uuid [primary key]
+  GuestJoinDate datetime
+  FirstName varchar
+  LastName varchar
+  DOB date
+  Email varchar 
+  PhoneNo integer
+  Address varchar
+  City varchar
+  State varchar
+  Country varchar
+  Zipcode integer
+}
+
+Table Hotels {
+  HotelID uuid [primary key]
+  Name varchar
+  PhoneNo integer
+  Email varchar 
+  Address varchar
+  City varchar
+  State varchar
+  Country varchar
+  StarRating integer
+  LocalCurrency varchar
+  ChainID integer
+}
+Ref: Hotels.ChainID > Chains.ChainID
+
+
+Table Chains { 
+  ChainID uuid [primary key]
+  Name varchar
+  Description varchar
+  WebsiteURL varchar
+}
+
+Table Reviews {
+  ReviewID uuid [primary key]
+  Rating integer
+  Comment varchar
+  ReviewDate datetime
+  GuestID integer 
+  BookingID integer
+}
+Ref: Reviews.GuestID > Guests.GuestID
+Ref: Reviews.BookingID > Bookings.BookingID
+
+Table Bookings {
+  BookingID uuid [primary key]
+  CheckIn datetime
+  CheckOut datetime
+  NumAdults integer
+  NumChild integer
+  Status varchar
+  TotalPrice integer
+  PointsEarned integer
+  Createdate timestamp
+  GuestID integer
+  HotelID integer
+}
+Ref: Bookings.GuestID > Guests.GuestID 
+Ref: Bookings.HotelID > Hotels.HotelID
+
+  Table Payments {
+  PaymentID uuid [primary key]
+  BookingID integer
+  PaymentStatus varchar
+  PaymentMode varchar
+  PaymentDate timestamp
+  Amount integer
+  TransactionID varchar
+}
+Ref: Payments.BookingID > Bookings.BookingID
+  
+Table Rooms {
+  RoomID uuid [primary key]
+  HotelID integer
+  RoomTypeID integer 
+  RoomNum integer
+  MaxOccupancy integer 
+}
+Ref: Rooms.HotelID > Hotels.HotelID
+Ref: Rooms.RoomTypeID > RoomTypes.RoomTypeID
+// Junction Table so that multiple rooms can be booked.
+Table BookingRooms {
+  BookingRoomID uuid [primary key]
+  BookingID integer
+  RoomID integer
+}
+Ref: BookingRooms.BookingID > Bookings.BookingID
+Ref: BookingRooms.RoomID > Rooms.RoomID
+
+Table RoomTypes {
+  RoomTypeID uuid [primary key]
+  TypeName varchar
+  HotelID integer
+  Rate integer
+}
+
+Table AddOns {
+  AddOnID uuid [primary key]
+  AddOnName varchar
+  Price integer
+  Description varchar
+}
+
+Table Amenities {
+  AmenityID uuid [primary key]
+  AmenityName varchar
+  Description varchar
+  StartTime time
+  EndTime time
+}
+
+Table Promotions {
+  PromotionID uuid [primary key]
+  Description integer
+  OfferCode varchar
+  DiscountPercentage integer
+  DiscountAmount integer 
+  StartDate datetime
+  EndDate datetime
+}
+
+Table MembershipTypes {
+  MembershipTypeID uuid [primary key]
+  Tier varchar
+  Description varchar
+  TierDiscountPercentage integer
+  Points integer
+}
+
+Table MembershipActivities {
+  MembershipActivityID uuid [primary key]
+  MembershipTypeID integer
+  BookingID integer
+  GuestID integer
+  TierJoinDate date
+  TransactionType varchar
+  TransactionDate datetime 
+}
+Ref: MembershipActivities.GuestID > Guests.GuestID
+Ref: MembershipActivities.MembershipTypeID > MembershipTypes.MembershipTypeID
+Ref: MembershipActivities.BookingID > Bookings.BookingID
+
+// An image entity to store details about the uploaded image
+Table Images {
+  ImageID uuid [primary key]
+  ImageURL varchar
+  ImageType varchar
+  ImageUploadDate datetime
+  ImageSize integer
+}
+// There are 6 junction tables for adding multiple images
+Table HotelImages {
+  HotelImageID integer [primary key]
+  ImageID integer
+  HotelID integer
+}
+Ref: HotelImages.HotelID > Hotels.HotelID
+Ref: HotelImages.ImageID > Images.ImageID
+
+Table RoomImages {
+  RoomImageID integer [primary key]
+  ImageID integer
+  RoomID integer
+}
+Ref: RoomImages.RoomID > Rooms.RoomID
+Ref: RoomImages.ImageID > Images.ImageID
+
+Table RoomTypeImages {
+  RoomTypeImageID integer [primary key]
+  ImageID integer
+  RoomTypeID integer
+}
+Ref: RoomTypeImages.RoomTypeID > RoomTypes.RoomTypeID
+Ref: RoomTypeImages.ImageID > Images.ImageID
+
+Table AmenityImages {
+  AmenityImageID integer [primary key]
+  ImageID integer
+  AmenityID integer
+}
+Ref: AmenityImages.AmenityID > Amenities.AmenityID
+Ref: AmenityImages.ImageID > Images.ImageID
+
+Table AddOnImages {
+  AddOnImageID integer [primary key]
+  ImageID integer
+  AddOnID integer
+}
+Ref: AddOnImages.AddOnID > AddOns.AddOnID
+Ref: AddOnImages.ImageID > Images.ImageID
+
+Table ChainImages {
+  ChainImageID integer [primary key]
+  ImageID integer
+  ChainID integer
+}
+Ref: ChainImages.ChainID > Chains.ChainID
+Ref: ChainImages.ImageID > Images.ImageID
+
+Table BookingsAddOns {
+  BookingAddOnID uuid [primary key]
+  BookingID integer 
+  AddOnID integer
+  Quantity integer
+  TotalCost integer
+}
+Ref: BookingsAddOns.AddOnID > AddOns.AddOnID
+Ref: BookingsAddOns.BookingID > Bookings.BookingID
+
+Table HotelAmentities {
+  HotelAmenityID uuid [primary key]
+  HotelID integer
+  AmenityID integer
+}
+Ref: HotelAmentities.HotelAmenityID > Amenities.AmenityID
+Ref: HotelAmentities.HotelID > Hotels.HotelID
+
+Table RoomAmenities {
+  RoomAmenityID uuid [primary key]
+  RoomType integer
+  AmenityID integer
+}
+Ref: RoomAmenities.AmenityID > Amenities.AmenityID
+Ref: RoomAmenities.RoomType > RoomTypes.RoomTypeID
+
+Table BookingPromotions {
+  BookingPromotionID uuid [primary key]
+  BookingID integer
+  PromotionID integer
+}
+Ref: BookingPromotions.BookingID > Bookings.BookingID
+Ref: BookingPromotions.PromotionID > Promotions.PromotionID
+
