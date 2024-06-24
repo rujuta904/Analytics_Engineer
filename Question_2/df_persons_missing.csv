@@ -1,0 +1,13 @@
+personId,firstName,lastName,email,dob,address,majors
+25776b75-17de-4085-902b-55617a56a5bd,John,Brown,john.brown@example.com,1991-01-09,"145 Spruce St, Madison, NY",
+8ed4d40c-ff5d-4d66-958f-66b87be9b4a3,Alice,Moore,alice.moore@example.com,1991-10-17,"432 Pine St, Fairview, FL",
+b54ea553-41b8-497b-8fc3-e7b218dc950e,Linda,Taylor,linda.taylor@example.com,1964-12-18,"538 Spruce St, Madison, NY",
+e5ee5910-1062-49e0-b919-25620d49f03f,Michael,Wilson,michael.wilson@example.com,1951-04-02,"642 Maple St, Riverside, OH",
+83908d96-5a8a-430c-ba27-3262bcc30bc1,James,Brown,james.brown@example.com,1993-06-23,"150 Elm St, Riverside, FL",
+38aa8dbc-afcf-455e-86bc-be62ddff28db,John,Taylor,john.taylor@example.com,1997-02-27,"623 Pine St, Madison, FL",
+efe64d39-40b3-4d60-a49f-3fd61fc6c79f,John,Doe,john.doe@example.com,1977-09-21,"742 Oak St, Georgetown, NY",
+da8907cc-b4bf-4c9f-a7cd-9b04c58486b5,Emily,Wilson,emily.wilson@example.com,1973-10-04,"542 Pine St, Riverside, CA",
+ad875a0e-a580-47ba-b47e-e5e160064c15,David,Miller,david.miller@example.com,1964-11-03,"545 Walnut St, Springfield, PA",
+d4736832-5608-49e1-88f2-f29feeb6a79b,John,Moore,john.moore@example.com,1981-11-16,"578 Pine St, Georgetown, TX",
+f7672679-6fbf-43ae-8593-cb267ab35a56,John,Wilson,john.wilson@example.com,1967-04-02,"866 Birch St, Madison, OH",
+bcd7282a-5497-43bc-88fd-5b5ec3b0e5ce,Emily,Smith,emily.smith@example.com,1960-01-01,"214 Elm St, Fairview, CA",
